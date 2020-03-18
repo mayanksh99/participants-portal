@@ -1,0 +1,32 @@
+.ant-menu-item {
+	max-width: 180px !important;
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+.ant-menu-item-selected {
+	max-width: 180px !important;
+	background-color: #0f9d58 !important;
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+.ant-btn {
+	background-color: #4285f4 !important;
+	color: #ffffff !important;
+	border: 0 !important;
+}
+
+.ant-btn:hover {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.event-card {
+	border: 0 !important;
+	border-radius: 4px !important;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
+}
+
+.event-card img {
+	max-height: 200px;
+}
