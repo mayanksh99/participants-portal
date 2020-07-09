@@ -9,8 +9,8 @@ export const UPDATE_PROFILE = "/users/profile/?id=5deab2193026f30ec826a0cc"; // 
 export const VIEW_USERS = "/users?sortBy=createdAt&sortType=asc"; // GET
 
 /** EVENTS MODULE : PARTICIPANTS **/
-export const REGISTER_PARTICIPANT = "/events/register_part"; // POST
-export const LOGIN_PARTICIPANT = "/events/part_login"; // POST
+export const REGISTER_PARTICIPANT = "/events/participants"; // POST NEW
+export const LOGIN_PARTICIPANT = "/events/participants/login"; // POST NEW
 export const REGISTER_FOR_EVENT = "/events/register_in_event"; // POST
 export const UPDATE_PARTICIPANT =
 	"/events/update_part/5e6a67b4890fda16986ae843"; // PUT
@@ -20,7 +20,7 @@ export const PARTICIPANT_DETAILS_BY_LEAD =
 	"/events/get_part?query=ritik&eventId=5e6dfb7caad4441a9ceb5b2e"; // GET
 
 /** EVENTS MODULE : EVENTS **/
-export const GET_EVENTS = "/events/get_events"; // GET
+export const GET_EVENTS = "/events"; // GET
 export const GET_EVENT = "/events/get_events/"; // GET
 export const ADD_EVENT = "/events/add_event"; // POST
 export const CHANGE_EVENT_CODE = "/events/change_event_code"; // POST

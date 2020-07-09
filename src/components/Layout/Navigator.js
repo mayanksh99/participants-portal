@@ -12,18 +12,18 @@ import logo from "../../utils/assets/images/logo-white.svg";
 
 const { Content, Sider } = Layout;
 
-const Dashboard = props => {
+const Navigator = props => {
 	const [isCollapsed] = useState(false);
 	const routeKey = localStorage.getItem("routeKey");
 
-	useEffect(() => {
-		if (
-			!localStorage.getItem("token") ||
-			localStorage.getItem("token") === "undefined"
-		) {
-			props.history.push("/login");
-		}
-	});
+	// useEffect(() => {
+	// 	if (
+	// 		!localStorage.getItem("token") ||
+	// 		localStorage.getItem("token") === "undefined"
+	// 	) {
+	// 		props.history.push("/login");
+	// 	}
+	// });
 
 	return (
 		<>
@@ -117,4 +117,4 @@ const Dashboard = props => {
 	);
 };
 
-export default Dashboard;
+export default Navigator;
