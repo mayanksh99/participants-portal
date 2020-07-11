@@ -4,7 +4,9 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import AuthProvider from "./contexts/userContext";
+import NetworkServices from "./utils/networkServices";
 
+NetworkServices();
 ReactDOM.render(
 	<AuthProvider>
 		<App />
