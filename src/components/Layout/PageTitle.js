@@ -1,6 +1,7 @@
 import React from "react";
 import { PageHeader } from "antd";
 import "./style.css";
+import UserProfile from "./UserProfile";
 
 const PageTitle = props => {
 	return (
@@ -14,7 +15,8 @@ const PageTitle = props => {
 				borderBottom: "1px solid rgb(235, 237, 240)"
 			}}
 			title={props.title}
-		/>
+			extra={[<UserProfile key="1" />]}
+		></PageHeader>
 	);
 };
 
