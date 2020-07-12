@@ -28,6 +28,7 @@ const UserProfile = () => {
 	const [profileDrawer, setProfileDrawer] = useState(false);
 	const [showSkeleton, setShowSkeleton] = useState(false);
 	const [showPop, setShowPop] = useState(false);
+	const [refresh, toggleRefresh] = useState(false);
 
 	useEffect(() => {
 		(async () => {
@@ -46,10 +47,11 @@ const UserProfile = () => {
 			}
 		})();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [refresh]);
 
 	const handleUpdateUser = () => {
 		setProfileDrawer(false);
+		toggleRefresh(!refresh);
 	};
 
 	const handlePopover = () => {

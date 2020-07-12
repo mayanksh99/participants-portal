@@ -11,12 +11,13 @@ const { Option } = Select;
 const EventsList = props => {
 	const [events, setEvents] = useState([]);
 	const [editDrawer, setEditDrawer] = useState(false);
-	const [eventId, setEventId] = useState(null);
+	const [eventType, setEventType] = useState(null);
 	const [refresh, toggleRefresh] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [allEvents, setAllEvents] = useState([]);
 
 	const handleChange = val => {
+		setEventType(val);
 		if (val === "past") {
 			setEvents(allEvents.previousEvents);
 		} else if (val === "upcoming") {
@@ -30,8 +31,8 @@ const EventsList = props => {
 			setIsLoading(true);
 			try {
 				const { data } = await getEventsService();
-				console.log(data);
 				setEvents(data.upcomingEvents);
+				setEventType("upcoming");
 				setAllEvents(data);
 				setIsLoading(false);
 			} catch (err) {
@@ -57,7 +58,11 @@ const EventsList = props => {
 				<Row gutter={[16, 16]}>
 					{events
 						? events.map((event, id) => (
-								<Event key={id} event={event} />
+								<Event
+									key={id}
+									event={event}
+									eventType={eventType}
+								/>
 						  ))
 						: "Loading"}
 				</Row>

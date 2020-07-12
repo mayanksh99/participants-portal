@@ -35,16 +35,7 @@ const UpdateProfile = props => {
 		props.form.validateFields(async (err, values) => {
 			if (!err) {
 				try {
-					const formData = new FormData();
-					formData.append("name", values.name);
-					formData.append("email", values.email);
-					formData.append("year", values.year);
-					formData.append("branch", values.branch);
-					formData.append("phone", values.phone);
-					if (values.password)
-						formData.append("password", values.password);
-
-					const res = await updateParticipantService(formData);
+					const res = await updateParticipantService(values);
 					if (res.message === "success") {
 						_notification("success", "Success", "Profile Updated");
 						props.onUpdateUser();
@@ -91,7 +82,7 @@ const UpdateProfile = props => {
 					</Col>
 				</Row>
 
-				<Form.Item label="Password" required>
+				<Form.Item label="Password">
 					{getFieldDecorator(
 						"password",
 						{}
