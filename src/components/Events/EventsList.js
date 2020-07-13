@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import PageTitle from "../Layout/PageTitle";
-import { Card, Row, Select } from "antd";
+import { Row, Select } from "antd";
 import "./style.css";
 import { getEventsService } from "../../utils/services";
 import { _notification } from "../../utils/_helpers";
 import Event from "./Event";
-import { Link } from "react-router-dom";
 const { Option } = Select;
 
 const EventsList = props => {
 	const [events, setEvents] = useState([]);
-	const [editDrawer, setEditDrawer] = useState(false);
+	// const [editDrawer, setEditDrawer] = useState(false);
 	const [eventType, setEventType] = useState(null);
-	const [refresh, toggleRefresh] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+	// const [refresh, toggleRefresh] = useState(false);
+	// const [isLoading, setIsLoading] = useState(false);
 	const [allEvents, setAllEvents] = useState([]);
 
 	const handleChange = val => {
@@ -28,18 +27,18 @@ const EventsList = props => {
 	};
 	useEffect(() => {
 		(async () => {
-			setIsLoading(true);
+			// setIsLoading(true);
 			try {
 				const { data } = await getEventsService();
 				setEvents(data.upcomingEvents);
 				setEventType("upcoming");
 				setAllEvents(data);
-				setIsLoading(false);
+				// setIsLoading(false);
 			} catch (err) {
 				_notification("warning", "Error", err.message);
 			}
 		})();
-	}, [refresh]);
+	}, []);
 
 	return (
 		<>

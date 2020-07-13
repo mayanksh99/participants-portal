@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Table, Divider, Tag, Card, Icon, Button, Popconfirm, Col } from "antd";
+import React, { useState } from "react";
+import { Tag, Card, Col } from "antd";
 import "./style.css";
-import { _notification } from "../../utils/_helpers";
-import { Link } from "react-router-dom";
 import EventDetails from "./EventDetails";
 
 const Events = props => {
