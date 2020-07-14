@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Col, Row, Button, Tag } from "antd";
 import styled from "styled-components";
 import { MdLocationOn, MdDateRange } from "react-icons/md";
 import { IoIosTime } from "react-icons/io";
-import { registerEventService } from "./../../utils/services";
+import {
+	registerEventService,
+	getParticipantService,
+	getRole
+} from "./../../utils/services";
 import { _notification } from "./../../utils/_helpers";
 
 const Heading = styled.h4`
@@ -38,6 +42,8 @@ const Wrapper = styled.div`
 
 const EventDetails = ({ visible, handleModal, event, eventType }) => {
 	const [loading, setLoading] = useState(false);
+	const [userData] = useState(getRole());
+	const [eventData, setEventData] = useState(null);
 	const {
 		_id,
 		title,
@@ -48,6 +54,20 @@ const EventDetails = ({ visible, handleModal, event, eventType }) => {
 		endDate,
 		venue
 	} = event;
+
+	useEffect(() => {
+		(async () => {
+			try {
+				const params = { pid: userData.id };
+				const res = await getParticipantService(params);
+				let a = [];
+				res.data.events.map(value => a.push(value.eid));
+				setEventData(a);
+			} catch (err) {
+				_notification("warning", "Error", err.message);
+			}
+		})();
+	}, []);
 
 	const handleRegister = async () => {
 		setLoading(true);
@@ -65,6 +85,7 @@ const EventDetails = ({ visible, handleModal, event, eventType }) => {
 			setLoading(false);
 		}
 	};
+
 	return (
 		<div>
 			<Modal
@@ -87,15 +108,31 @@ const EventDetails = ({ visible, handleModal, event, eventType }) => {
 						<Tag color="blue">{eventType}</Tag>
 					</Col>
 					<Col xl={12} lg={12} md={12} sm={12} xs={24}>
-						<ButtonContainer>
-							<EditButton
-								size="large"
-								loading={loading}
-								onClick={handleRegister}
-							>
-								Register here
-							</EditButton>
-						</ButtonContainer>
+						{eventType === "past" ||
+						eventType === "running" ? null : eventData ? (
+							eventData.includes(_id) ? (
+								<ButtonContainer>
+									<EditButton
+										size="large"
+										loading={loading}
+										disabled
+									>
+										Already Registered
+									</EditButton>
+								</ButtonContainer>
+							) : (
+								<ButtonContainer>
+									<EditButton
+										size="large"
+										loading={loading}
+										onClick={handleRegister}
+										type="primary"
+									>
+										Register here
+									</EditButton>
+								</ButtonContainer>
+							)
+						) : null}
 					</Col>
 				</Row>
 				<br />

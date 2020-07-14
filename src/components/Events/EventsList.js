@@ -19,9 +19,11 @@ const EventsList = props => {
 		setEventType(val);
 		if (val === "past") {
 			setEvents(allEvents.previousEvents);
-		} else if (val === "upcoming") {
+		}
+		if (val === "upcoming") {
 			setEvents(allEvents.upcomingEvents);
-		} else if (val === "running") {
+		}
+		if (val === "running") {
 			setEvents(allEvents.runningEvents);
 		}
 	};
@@ -30,6 +32,7 @@ const EventsList = props => {
 			// setIsLoading(true);
 			try {
 				const { data } = await getEventsService();
+				// console.log(data);
 				setEvents(data.upcomingEvents);
 				setEventType("upcoming");
 				setAllEvents(data);
