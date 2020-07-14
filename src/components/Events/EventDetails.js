@@ -40,6 +40,13 @@ const Wrapper = styled.div`
 	font-size: 16px;
 `;
 
+const RegisterInfo = styled.p`
+	color: #db4437;
+	text-align: center;
+	margin-top: 12px;
+	font-size: 16px;
+`;
+
 const EventDetails = ({ visible, handleModal, event, eventType }) => {
 	const [loading, setLoading] = useState(false);
 	const [userData] = useState(getRole());
@@ -52,7 +59,9 @@ const EventDetails = ({ visible, handleModal, event, eventType }) => {
 		image,
 		startDate,
 		endDate,
-		venue
+		venue,
+		isRegistrationOpened,
+		isRegistrationRequired
 	} = event;
 
 	useEffect(() => {
@@ -109,31 +118,43 @@ const EventDetails = ({ visible, handleModal, event, eventType }) => {
 						<Tag color="blue">{eventType}</Tag>
 					</Col>
 					<Col xl={12} lg={12} md={12} sm={12} xs={24}>
-						{eventType === "past" ||
-						eventType === "running" ? null : eventData ? (
-							eventData.includes(_id) ? (
-								<ButtonContainer>
-									<EditButton
-										size="large"
-										loading={loading}
-										disabled
-									>
-										Already Registered
-									</EditButton>
-								</ButtonContainer>
+						{isRegistrationRequired ? (
+							isRegistrationOpened ? (
+								eventType === "past" ||
+								eventType === "running" ? null : eventData ? (
+									eventData.includes(_id) ? (
+										<ButtonContainer>
+											<EditButton
+												size="large"
+												loading={loading}
+												disabled
+											>
+												Already Registered
+											</EditButton>
+										</ButtonContainer>
+									) : (
+										<ButtonContainer>
+											<EditButton
+												size="large"
+												loading={loading}
+												onClick={handleRegister}
+												type="primary"
+											>
+												Register here
+											</EditButton>
+										</ButtonContainer>
+									)
+								) : null
 							) : (
-								<ButtonContainer>
-									<EditButton
-										size="large"
-										loading={loading}
-										onClick={handleRegister}
-										type="primary"
-									>
-										Register here
-									</EditButton>
-								</ButtonContainer>
+								<RegisterInfo>
+									Registration will start soon
+								</RegisterInfo>
 							)
-						) : null}
+						) : (
+							<RegisterInfo>
+								Registration not required
+							</RegisterInfo>
+						)}
 					</Col>
 				</Row>
 				<br />
