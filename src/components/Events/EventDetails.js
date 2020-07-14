@@ -67,6 +67,7 @@ const EventDetails = ({ visible, handleModal, event, eventType }) => {
 				_notification("warning", "Error", err.message);
 			}
 		})();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleRegister = async () => {
