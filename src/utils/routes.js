@@ -1,23 +1,14 @@
 /** PARTICIPANTS MODULE **/
 export const REGISTER_PARTICIPANT = "/events/participants"; // POST NEW
 export const LOGIN_PARTICIPANT = "/events/participants/login"; // POST NEW
-export const FORGOTPASS = "/events/participants/forgot-pwd"; // POST
-export const RESETPASS = "/events/participants/reset-pwd"; // POST
-// @queryParams userId
-export const UPDATE_USER = "/users/5deab2193026f30ec826a0cc"; // PUT
+export const FORGOTPASS = "/events/participants/forgot-pwd"; // POST NEW
+export const RESETPASS = "/events/participants/reset-pwd"; // POST NEW
 // @queryParams pid
-export const VIEW_PROFILE = "/events/participants/profile"; // GET
-export const UPDATE_PROFILE = "/events/participants"; // POST
-export const VIEW_USERS = "/users?sortBy=createdAt&sortType=asc"; // GET
+export const VIEW_PROFILE = "/events/participants/profile"; // GET NEW
+export const UPDATE_PROFILE = "/events/participants"; // POST NEW
 
 /** EVENTS MODULE : PARTICIPANTS **/
-export const REGISTER_FOR_EVENT = "/events/register_in_event"; // POST
-export const UPDATE_PARTICIPANT =
-	"/events/update_part/5e6a67b4890fda16986ae843"; // PUT
-export const PARTICIPANT_DETAILS =
-	"/events/part_data?participantId=5e6bc1dec3988900640bd922"; // GET
-export const PARTICIPANT_DETAILS_BY_LEAD =
-	"/events/get_part?query=ritik&eventId=5e6dfb7caad4441a9ceb5b2e"; // GET
+export const REGISTER_FOR_EVENT = "/events/register"; // POST NEW
 
 /** EVENTS MODULE : EVENTS **/
 export const GET_EVENTS = "/events"; // GET
