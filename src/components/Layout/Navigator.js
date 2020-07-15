@@ -13,7 +13,7 @@ import logo from "../../utils/assets/images/logo-white.svg";
 const { Content, Sider } = Layout;
 
 const Navigator = props => {
-	const [isCollapsed] = useState(false);
+	const [isCollapsed] = useState(true);
 	// const [show, setShow] = useState(true);
 	const routeKey = localStorage.getItem("routeKey");
 

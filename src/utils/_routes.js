@@ -1,5 +1,6 @@
 import EventsList from "../components/Events/EventsList";
 import Dashboard from "../components/Layout/Dashboard";
+import MarkAttendance from "./../components/Attendance/MarkAttendance";
 
 let routes = [
 	{
@@ -20,6 +21,16 @@ let routes = [
 		key: "events",
 		icon: "calendar",
 		description: "List of all the events",
+		color: "#DB4437"
+	},
+	{
+		path: "/attendance",
+		exact: true,
+		component: MarkAttendance,
+		name: "Attendance",
+		key: "attendance",
+		icon: "login",
+		description: "Mark your attendance",
 		color: "#DB4437"
 	}
 ];
