@@ -13,7 +13,8 @@ export const MARK_ATTENDANCE = "/events/attendance/mark"; //POST NEW
 
 /** EVENTS MODULE : EVENTS **/
 export const GET_EVENTS = "/events"; // GET
-export const GET_EVENT = "/events/get_events/"; // GET
+export const GET_EVENT = "/events"; // GET NEW
+export const GET_CERTI = "/events/certificate"; //GET NEW
 export const ADD_EVENT = "/events/add_event"; // POST
 export const CHANGE_EVENT_CODE = "/events/change_event_code"; // POST
 export const TOGGLE_REGISTRATION = "/events/event_regist_open"; // POST
