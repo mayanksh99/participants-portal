@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PageTitle from "./../../Layout/PageTitle";
-import { Card, Row, Col, Button, Divider, Tag } from "antd";
+import { Card, Row, Col, Button, Divider, Tag, Drawer } from "antd";
 import { getEventService } from "../../../utils/services";
 import { _notification } from "./../../../utils/_helpers";
 import styled from "styled-components";
 import { MdLocationOn, MdDateRange } from "react-icons/md";
 import { IoIosTime } from "react-icons/io";
 import { generateCertificateService } from "./../../../utils/services";
+import FeedbackForm from "./Feedback";
 
 const Heading = styled.h4`
 	font-weight: bold;
@@ -31,6 +32,7 @@ const Wrapper = styled.div`
 const MyEventDetails = props => {
 	const [event, setEvent] = useState(null);
 	const [loading, setLoading] = useState(false);
+	const [viewDrawer, setViewDrawer] = useState(false);
 
 	useEffect(() => {
 		(async () => {
@@ -59,6 +61,10 @@ const MyEventDetails = props => {
 			_notification("warning", "Error", err.message);
 			setLoading(false);
 		}
+	};
+
+	const feedbackSubmit = () => {
+		setViewDrawer(false);
 	};
 
 	return (
@@ -117,7 +123,12 @@ const MyEventDetails = props => {
 								<DescHeading>Description</DescHeading>
 								<p>{event.description}</p>
 								<div>
-									<Button type="dashed">Feedback</Button>
+									<Button
+										type="dashed"
+										onClick={() => setViewDrawer(true)}
+									>
+										Feedback
+									</Button>
 									<br />
 									<Button
 										type="primary"
@@ -133,6 +144,21 @@ const MyEventDetails = props => {
 					</Row>
 				</Card>
 			) : null}
+
+			<Drawer
+				title="Feedback Form"
+				placement="right"
+				closable={true}
+				width="30%"
+				destroyOnClose={true}
+				onClose={() => setViewDrawer(false)}
+				visible={viewDrawer}
+			>
+				<FeedbackForm
+					eid={props.match.params.id}
+					onFeedbackSubmit={feedbackSubmit}
+				/>
+			</Drawer>
 		</div>
 	);
 };
