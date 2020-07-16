@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import PageTitle from "./../../Layout/PageTitle";
-import { Card, Row, Col, Button, Divider, Tag, Drawer } from "antd";
+import { Card, Row, Col, Button, Tag, Drawer, Table } from "antd";
 import { getEventService } from "../../../utils/services";
 import { _notification } from "./../../../utils/_helpers";
 import styled from "styled-components";
 import { MdLocationOn, MdDateRange } from "react-icons/md";
 import { IoIosTime } from "react-icons/io";
-import { generateCertificateService } from "./../../../utils/services";
+import {
+	generateCertificateService,
+	attendanceReportService
+} from "./../../../utils/services";
 import FeedbackForm from "./Feedback";
+import moment from "moment";
 
 const Heading = styled.h4`
 	font-weight: bold;
@@ -33,12 +37,23 @@ const MyEventDetails = props => {
 	const [event, setEvent] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const [viewDrawer, setViewDrawer] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const [data, setData] = useState([]);
 
 	useEffect(() => {
+		setIsLoading(true);
 		(async () => {
 			try {
 				const res = await getEventService(props.match.params.id);
 				setEvent(res.data);
+				let params = { eid: props.match.params.id };
+				const response = await attendanceReportService(params);
+				let date = [];
+				date = response.data.attendance.map(d => {
+					return d.split("T")[0];
+				});
+				setData(dataCalc(res.data, date));
+				setIsLoading(false);
 			} catch (err) {
 				_notification("warning", "Error", err.message);
 			}
@@ -67,8 +82,79 @@ const MyEventDetails = props => {
 		setViewDrawer(false);
 	};
 
+	const columns = [
+		{
+			title: "#",
+			dataIndex: "index",
+			key: "index"
+		},
+		{
+			title: "Date",
+			dataIndex: "date",
+			key: "date"
+		},
+		{
+			title: "Status",
+			dataIndex: "status",
+			key: "status",
+			render: text => (
+				<>
+					{text === "Present" ? (
+						<Tag color="green">Present</Tag>
+					) : null}
+					{text === "Absent" ? <Tag color="red">Absent</Tag> : null}
+					{text === "Pending" ? (
+						<Tag color="orange">Pending</Tag>
+					) : null}
+				</>
+			)
+		}
+	];
+
+	const dataCalc = (event, attendance) => {
+		let data = [];
+		if (event) {
+			var start = new Date(event.startDate);
+			var end = new Date(event.endDate);
+			let status;
+			for (var d = start; d <= end; d.setDate(d.getDate() + 1)) {
+				if (
+					attendance.includes(
+						moment(new Date(d)).format("YYYY-MM-DD")
+					)
+				) {
+					status = "Present";
+				} else if (
+					!attendance.includes(
+						moment(new Date(d)).format("YYYY-MM-DD")
+					) &&
+					moment(new Date(d)).format("YYYY-MM-DD") <
+						moment(Date.now()).format("YYYY-MM-DD")
+				) {
+					status = "Absent";
+				} else if (
+					!attendance.includes(
+						moment(new Date(d)).format("YYYY-MM-DD")
+					)
+				) {
+					status = "Pending";
+				}
+				data.push({
+					status,
+					date: moment(new Date(d)).format("YYYY-MM-DD")
+				});
+			}
+		}
+		return data;
+	};
+
+	const tableData = data.map((d, id) => {
+		const { status, date } = d;
+		return { index: ++id, key: ++id, status, date };
+	});
+
 	return (
-		<div>
+		<>
 			<PageTitle title="My Events" />
 			{event ? (
 				<Card bordered={false}>
@@ -116,7 +202,6 @@ const MyEventDetails = props => {
 									to {new Date(event.endDate).toDateString()}
 								</p>
 							</Wrapper>
-							{/* <Tag color="blue">{eventType}</Tag> */}
 						</Col>
 						<Col xl={10} lg={8} md={8} sm={24} xs={24}>
 							<DescriptionContainer>
@@ -145,6 +230,17 @@ const MyEventDetails = props => {
 				</Card>
 			) : null}
 
+			<div className="table-wrapper-card">
+				<Card style={{ padding: 0, overflowX: "auto" }}>
+					<DescHeading>Attendance log</DescHeading>
+					<Table
+						loading={isLoading}
+						columns={columns}
+						dataSource={tableData}
+					/>
+				</Card>
+			</div>
+
 			<Drawer
 				title="Feedback Form"
 				placement="right"
@@ -159,7 +255,7 @@ const MyEventDetails = props => {
 					onFeedbackSubmit={feedbackSubmit}
 				/>
 			</Drawer>
-		</div>
+		</>
 	);
 };
 
