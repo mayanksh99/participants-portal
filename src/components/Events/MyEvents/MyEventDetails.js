@@ -149,7 +149,7 @@ const MyEventDetails = props => {
 				title="Feedback Form"
 				placement="right"
 				closable={true}
-				width="30%"
+				width="35%"
 				destroyOnClose={true}
 				onClose={() => setViewDrawer(false)}
 				visible={viewDrawer}

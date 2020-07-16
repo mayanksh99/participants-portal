@@ -43,12 +43,13 @@ const MarkAttendance = props => {
 			if (!err) {
 				try {
 					const res = await markAttendanceService(values);
+					console.log(res);
 					if (res.error) {
 						_notification("error", "Error", res.message);
 						props.form.setFieldsValue({
 							code: ""
 						});
-					} else if (res.res.message === "success") {
+					} else if (res.message === "success") {
 						_notification(
 							"success",
 							"Success",
