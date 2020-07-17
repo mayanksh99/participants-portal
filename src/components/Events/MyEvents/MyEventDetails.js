@@ -154,7 +154,7 @@ const MyEventDetails = props => {
 	});
 
 	return (
-		<>
+		<div className="all-Containers">
 			<PageTitle title="My Events" />
 			{event ? (
 				<Card bordered={false}>
@@ -245,7 +245,6 @@ const MyEventDetails = props => {
 				title="Feedback Form"
 				placement="right"
 				closable={true}
-				width="35%"
 				destroyOnClose={true}
 				onClose={() => setViewDrawer(false)}
 				visible={viewDrawer}
@@ -255,7 +254,7 @@ const MyEventDetails = props => {
 					onFeedbackSubmit={feedbackSubmit}
 				/>
 			</Drawer>
-		</>
+		</div>
 	);
 };
 
