@@ -31,7 +31,9 @@ let routes = [
 		name: "MyEvents",
 		key: "myevent",
 		icon: "folder",
+
 		description: "List of my events",
+
 		color: "#DB4437"
 	},
 	{

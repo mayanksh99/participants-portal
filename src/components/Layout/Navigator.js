@@ -10,7 +10,9 @@ import {
 } from "react-router-dom";
 import logo from "../../utils/assets/images/logo-white.svg";
 import MyEventDetails from "./../Events/MyEvents/MyEventDetails";
+
 import styled from "styled-components";
+
 const { Content, Sider } = Layout;
 
 const MenuLogo = styled.div`
@@ -24,7 +26,9 @@ const EditSider = styled(Sider)`
 `;
 
 const Navigator = props => {
+
 	const [isCollapsed] = useState(false);
+
 
 	return (
 		<>

@@ -82,6 +82,7 @@ const MarkAttendance = props => {
 
 	return (
 		<div className="all-Containers">
+
 			<PageTitle title="Attendance" />
 
 			<Card

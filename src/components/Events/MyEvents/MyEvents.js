@@ -4,6 +4,7 @@ import { Card, Row, Col, Result, Tag } from "antd";
 import { getRole, getParticipantService } from "./../../../utils/services";
 import { _notification } from "./../../../utils/_helpers";
 import { Link } from "react-router-dom";
+
 import styled from "styled-components";
 
 const Time = styled.p`
@@ -29,6 +30,7 @@ const MyEvents = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
+
 		<div className="all-Containers">
 			<PageTitle title="My Events" />
 			<Row gutter={[16, 16]}>

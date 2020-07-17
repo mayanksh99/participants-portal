@@ -154,7 +154,9 @@ const MyEventDetails = props => {
 	});
 
 	return (
+
 		<div className="all-Containers">
+
 			<PageTitle title="My Events" />
 			{event ? (
 				<Card bordered={false}>
@@ -255,6 +257,7 @@ const MyEventDetails = props => {
 				/>
 			</Drawer>
 		</div>
+
 	);
 };
 
